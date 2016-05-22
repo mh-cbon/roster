@@ -1,5 +1,5 @@
 {
-  "name": "roster",
+  "name": "@mh-cbon/roster",
   "version": "0.0.3",
   "description": "Create or delete system user accounts in OS X, Linux and Windows.",
   "main": "index.js",
