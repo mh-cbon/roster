@@ -4,7 +4,14 @@
   "description": "Create or delete system user accounts in OS X, Linux and Windows.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch": "npm version patch -m \"patch %s\"",
+    "minor": "npm version minor -m \"minor %s\"",
+    "major": "npm version major -m \"major %s\"",
+    "preversion": "echo \"npm test: not defined\"",
+    "version": "echo \"npm run build: not defined\"",
+    "postversion": "git push && git push --tags && npm run public",
+    "public": "npm publish --access=public"
   },
   "bin": {
     "roster": "./bin/roster"
@@ -14,7 +21,6 @@
   "dependencies": {
     "async": "^0.9.0",
     "rimraf": "^2.2.8",
-    "sudoer": "0.0.1",
     "which": "^1.0.5"
   },
   "devDependencies": {},
