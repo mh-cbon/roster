@@ -1,36 +1,44 @@
 #!/usr/bin/env node
 
-var roster  = require('..'),
-    command = process.argv[2],
-    name    = process.argv[3];
+var roster  = require('../index.js');
 
-if (!name)
-  return usage();
+var argv = require('minimist')(process.argv.slice(2));
+
+var command = argv['_'] && argv['_'][0];
+var name = argv['_'] && argv['_'][1];
+
+if (!command || !name) return usage();
 
 function usage() {
-  console.log('Usage: roster [command] user [opts]');
+  console.error('Usage: roster [command] user [opts]');
   // console.log('Where command is one of: ' + Object.keys(roster).join(', '))
-  console.log('Where command is one of: exists, groups, create, delete.')
+  console.error('')
+  console.error('roster exists user [opts]')
+  console.error('roster groups user [opts]')
+  console.error('roster create user [opts]')
+  console.error('roster delete user [opts]')
   process.exit(1);
-}
-
-function done(err, res) {
-  if (err)
-    console.log('Error: ' + err.message);
-  else
-    console.log('Success!');
 }
 
 switch (command) {
   case 'exists':
-    return roster.exists(name, function(bool) { 
-      console.log('Exists: ' + bool); 
+    return roster.exists(name, function(err, bool) {
+      if (err) {
+        console.error(argv.json ? JSON.stringify(err) : err);
+        process.exit(1)
+      }
+      if (argv.json) return console.log(JSON.stringify(bool))
+      console.log('Exists: %s', bool);
     });
     break;
 
   case 'groups':
     return roster.get_groups(name, function(err, list) {
-      console.log(err || list);
+      if (err) {
+        console.error(argv.json ? JSON.stringify(err) : err);
+        process.exit(1)
+      }
+      console.log(argv.json ? JSON.stringify(list) : list);
     })
 
   case 'create':
@@ -46,4 +54,12 @@ switch (command) {
 
   default:
     usage();
+}
+
+function done(err, res) {
+  if (err) {
+    console.error(argv.json ? JSON.stringify(err) : err);
+    process.exit(1)
+  }
+  console.log(argv.json ? JSON.stringify(true) : 'Success!');
 }
