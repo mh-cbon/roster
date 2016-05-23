@@ -2,23 +2,47 @@
 
 var roster  = require('../index.js');
 
-var argv = require('minimist')(process.argv.slice(2));
+var argv  = require('minimist')(process.argv.slice(2));
+var pkg   = require('../package.json');
+var debug = require('debug')(pkg.name);
 
 var command = argv['_'] && argv['_'][0];
 var name = argv['_'] && argv['_'][1];
 
-if (!command || !name) return usage();
+if (!command || !name || argv.h || argv.help) return usage();
 
 function usage() {
-  console.error('Usage: roster [command] user [opts]');
-  // console.log('Where command is one of: ' + Object.keys(roster).join(', '))
+  console.error('%s %s', pkg.name, pkg.version);
   console.error('')
-  console.error('roster exists user [opts]')
-  console.error('roster groups user [opts]')
-  console.error('roster create user [opts]')
-  console.error('roster delete user [opts]')
+  console.error('Usage: roster [command] [user] [opts]');
+  console.error('')
+  console.error('Commands:');
+  console.error('')
+  console.error(' roster exists [user] [opts]')
+  console.error('')
+  console.error(' roster groups [user] [opts]')
+  console.error('')
+  console.error(' roster create [user] [opts]')
+  console.error('   --home|-h       Create the home directory')
+  console.error('   --home_dir|-d   Specify the home directory path')
+  console.error('   --full_name|-f  Set the user full name')
+  console.error('   --user_id|-i    Set the user ID')
+  console.error('   --group_id|-g   Set the group ID')
+  console.error('   --shell|-s      Set the user shell')
+  console.error('   --groups        List of additionals comma separated groups to subscribe')
+  console.error('')
+  console.error(' roster delete [user] [opts]')
+  console.error('   --remove|-r     Delete the home directory')
+  console.error('')
+  console.error('Options:');
+  console.error('')
+  console.error('   --json          Print results as JSON')
+  console.error('')
+
   process.exit(1);
 }
+
+debug('argv %j', argv)
 
 switch (command) {
   case 'exists':
@@ -42,14 +66,13 @@ switch (command) {
     })
 
   case 'create':
-    var opts = { user: name, full_name: 'John ' + name };
-    return roster.create(opts, done);
+    argv.user = name;
+    return roster.create(argv, done);
     break;
 
   case 'remove':
   case 'delete':
-    var opts = { delete_home: false };
-    return roster.delete(name, opts, done);
+    return roster.delete(name, argv, done);
     break;
 
   default:

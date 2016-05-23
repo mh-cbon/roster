@@ -19,13 +19,18 @@
   "author": "Tomas Pollak <tomas@forkhq.com>",
   "license": "MIT",
   "dependencies": {
+    "@mh-cbon/c-yasudo": "^1.0.1",
+    "@mh-cbon/dscacheutil": "^1.0.3",
     "async": "^0.9.0",
     "debug": "^2.2.0",
+    "debug-stream": "^3.0.1",
     "minimist": "^1.2.0",
     "rimraf": "^2.2.8",
     "which": "^1.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "should": "^8.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tomas/roster.git"

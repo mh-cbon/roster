@@ -1,32 +1,71 @@
 Roster
 =====
 
-Create or delete system user accounts in Mac, Linux and Windows. 
+Create or delete system user accounts in Mac, Linux and Windows.
 
 ## Installation
 
-    npm install roster
+    npm install roster --save
 
 ## API
 
-    var roster = require('roster');
+```js
+var roster = require('roster');
 
-    roster.exists('username', function(exists) {
-      console.log('User exists? ' + exists);
-    })
+roster.exists('username', function(exists) {
+  console.log('User exists? ' + exists);
+})
 
-    roster.create({ user: 'new_guy', name: 'The New Guy' }, function(err) {
-      if (!err)
-        console.log('Successfully created.')
-    })
+roster.create({ user: 'new_guy', full_name: 'The New Guy' }, function(err) {
+  if (!err) console.log('Successfully created.')
+})
 
-    roster.delete('bad_user', function(err) {
-      if (!err)
-        console.log('Successfully delete.')
-    })
+roster.delete('bad_user', function(err) {
+  if (!err) console.log('Successfully deleted.')
+})
+```
 
-That's it. For all options, check the examples.
+## As a binary
 
-## Boring stuff
+    npm install roster -g
+
+## Usage
+
+```sh
+@mh-cbon/roster 0.0.3
+
+Usage: roster [command] [user] [opts]
+
+Commands:
+
+ roster exists [user] [opts]
+
+ roster groups [user] [opts]
+
+ roster create [user] [opts]
+   --home|-h       Create the home directory
+   --home_dir|-d   Specify the home directory path
+   --full_name|-f  Set the user full name
+   --user_id|-i    Set the user ID
+   --group_id|-g   Set the group ID
+   --shell|-s      Set the user shell
+   --groups        List of additionals comma separated groups to subscribe
+
+ roster delete [user] [opts]
+   --remove|-r     Delete the home directory
+
+Options:
+
+   --json          Print results as JSON
+```
+
+## Tests
+
+- install vagrant from the official website
+- add vbguest plugin `vagrant plugin install vbguest`
+- add wrmi plugin `vagrant plugin install wrmi`
+- `sh mocha.sh`
+
+## Credits
 
 Written by Tomás Pollak. MIT licensed.
