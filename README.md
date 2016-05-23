@@ -5,12 +5,12 @@ Create or delete system user accounts in Mac, Linux and Windows.
 
 ## Installation
 
-    npm install roster --save
+    npm install @mh-cbon/roster --save
 
 ## API
 
 ```js
-var roster = require('roster');
+var roster = require('@mh-cbon/roster');
 
 roster.exists('username', function(exists) {
   console.log('User exists? ' + exists);
@@ -23,11 +23,16 @@ roster.create({ user: 'new_guy', full_name: 'The New Guy' }, function(err) {
 roster.delete('bad_user', function(err) {
   if (!err) console.log('Successfully deleted.')
 })
+
+roster.get_groups('bad_user', function(err, groups) {
+  err && console.error(err);
+  groups && console.log(JSON.stringify(groups, null, 2))
+})
 ```
 
 ## As a binary
 
-    npm install roster -g
+    npm install @mh-cbon/roster -g
 
 ## Usage
 
