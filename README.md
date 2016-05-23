@@ -55,6 +55,9 @@ Commands:
    --group_id|-g   Set the group ID
    --shell|-s      Set the user shell
    --groups        List of additionals comma separated groups to subscribe
+   --system        Linux only, create a system account (-r)
+   --hidden        Macos only, create an hidden account
+   --guest         Macos only, create a guest account
 
  roster delete [user] [opts]
    --remove|-r     Delete the home directory
