@@ -15,8 +15,8 @@ Vagrant.configure("2") do |config|
     win.vm.communicator = :winrm
     win.vm.provider "virtualbox" do |vb|
       # first setup requires gui to be enabled so scripts can be executed in virtualbox guest screen
-      vb.gui = true
       vb.gui = false
+      vb.gui = true
       vb.customize ["modifyvm", :id, "--memory", "1524"]
       vb.customize ["modifyvm", :id, "--vram", "128"]
       vb.customize ["modifyvm", :id,  "--cpus", "1"]

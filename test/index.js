@@ -4,6 +4,8 @@ var fs      = require('fs');
 var spawn   = require('child_process').spawn;
 var sspawn  = require('@mh-cbon/c-yasudo');
 
+if (process.platform.match(/win32/)) return;
+
 describe('roster', function () {
 
   before(function (done) {

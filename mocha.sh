@@ -1,5 +1,11 @@
 # set -e
 
+vagrant up win2012
+vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\node-setup.bat | Write-Output"
+vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\run-tests.bat | Write-Output"
+vagrant halt win2012
+exit
+
 vagrant up fedora
 vagrant rsync fedora
 vagrant ssh fedora -c "sh /vagrant/vagrant/node-setup-fedora.sh"
@@ -34,8 +40,3 @@ vagrant up yosemite
 vagrant ssh yosemite -c "sh /Users/vagrant/wd/vagrant/node-setup-mac.sh"
 vagrant ssh yosemite -c "sh /Users/vagrant/wd/vagrant/run-tests-mac.sh"
 vagrant halt yosemite
-
-vagrant up win2012
-vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\node-setup.bat | Write-Output"
-vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\run-tests.bat | Write-Output"
-vagrant halt win2012
