@@ -52,10 +52,9 @@ switch (command) {
     return roster.exists(name, function(err, bool) {
       if (err) {
         console.error(argv.json ? JSON.stringify(err) : err);
-        process.exit(1)
-      }
-      if (argv.json) return console.log(JSON.stringify(bool))
-      console.log('Exists: %s', bool);
+        process.exitCode = 1;
+      } else if (argv.json) console.log(JSON.stringify(bool))
+      else console.log('Exists: %s', bool);
     });
     break;
 
@@ -63,9 +62,8 @@ switch (command) {
     return roster.get_groups(name, function(err, list) {
       if (err) {
         console.error(argv.json ? JSON.stringify(err) : err);
-        process.exit(1)
-      }
-      console.log(argv.json ? JSON.stringify(list) : list);
+        process.exitCode = 1;
+      } else console.log(argv.json ? JSON.stringify(list) : list);
     })
 
   case 'create':
@@ -85,7 +83,6 @@ switch (command) {
 function done(err, res) {
   if (err) {
     console.error(argv.json ? JSON.stringify(err) : err);
-    process.exit(1)
-  }
-  console.log(argv.json ? JSON.stringify(true) : 'Success!');
+    process.exitCode = 1;
+  } else console.log(argv.json ? JSON.stringify(true) : 'Success!');
 }
