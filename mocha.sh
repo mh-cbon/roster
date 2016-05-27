@@ -1,5 +1,12 @@
 # set -e
 
+vagrant up maverick
+vagrant rsync maverick
+vagrant ssh maverick -c "sh /Users/vagrant/wd/vagrant/node-setup-mac.sh"
+vagrant ssh maverick -c "sh /Users/vagrant/wd/vagrant/run-tests-mac.sh"
+# vagrant halt maverick
+exit
+
 vagrant up win2012
 vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\node-setup.bat | Write-Output"
 vagrant winrm win2012 -c ". C:\\vagrant\\vagrant\\run-tests.bat | Write-Output"
@@ -13,12 +20,6 @@ vagrant ssh fedora -c "sh /vagrant/vagrant/run-tests-fedora.sh"
 vagrant halt fedora
 exit
 
-vagrant up maverick
-vagrant rsync maverick
-vagrant ssh maverick -c "sh /Users/vagrant/wd/vagrant/node-setup-mac.sh"
-vagrant ssh maverick -c "sh /Users/vagrant/wd/vagrant/run-tests-mac.sh"
-# vagrant halt maverick
-exit
 
 vagrant up ubuntu
 vagrant ssh ubuntu -c "sh /vagrant/vagrant/node-setup-ubuntu.sh"

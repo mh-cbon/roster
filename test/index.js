@@ -8,6 +8,8 @@ if (process.platform.match(/win32/)) return;
 
 describe('roster', function () {
 
+  this.timeout(5000);
+
   before(function (done) {
     var home = '/home/other2'
     if(process.platform.match(/darwin/))
@@ -127,7 +129,7 @@ describe('roster', function () {
   })
 
   it('should create an user with a home', function (done) {
-    var child = spawn(process.argv[0], [__dirname + '/../bin/roster', 'create', 'else', '-h']);
+    var child = spawn(process.argv[0], [__dirname + '/../bin/roster', 'create', 'else', '--home']);
 
     child.stdout.pipe(process.stderr);
     child.stderr.pipe(process.stderr);
@@ -148,7 +150,7 @@ describe('roster', function () {
   it('should create an user with a home into a pre defined directory', function (done) {
     var home = '/home/other2';
     if(process.platform.match(/darwin/)) home = '/Users/other2';
-    var child = spawn(process.argv[0], [__dirname + '/../bin/roster', 'create', 'other', '-h', '-d', home]);
+    var child = spawn(process.argv[0], [__dirname + '/../bin/roster', 'create', 'other', '--home', '-d', home]);
 
     child.stdout.pipe(process.stderr);
     child.stderr.pipe(process.stderr);

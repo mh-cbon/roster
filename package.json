@@ -20,8 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "@mh-cbon/c-yasudo": "^1.0.1",
-    "@mh-cbon/dscacheutil": "^1.0.3",
-    "@mh-cbon/windows-net": "^1.0.1",
+    "@mh-cbon/dscl-users": "^1.0.1",
+    "@mh-cbon/windows-net": "^1.0.3",
     "async": "^0.9.0",
     "debug": "^2.2.0",
     "debug-stream": "^3.0.1",
